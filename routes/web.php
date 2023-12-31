@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SessionsController;
             
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -42,6 +41,13 @@ Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('aut
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
+	// Route for all Papers
+	Route::get('my-papers', function () {
+		return view('pages.papers');
+	})->name('my-papers');
+	Route::get('new-paper', function () {
+		return view('pages.new-paper');
+	})->name('new-paper');
 	Route::get('billing', function () {
 		return view('pages.billing');
 	})->name('billing');
@@ -67,6 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-management');
 	})->name('user-management');
 	Route::get('user-profile', function () {
-		return view('pages.laravel-examples.user-profile');
+		return view('pages.user-profile');
 	})->name('user-profile');
 });
