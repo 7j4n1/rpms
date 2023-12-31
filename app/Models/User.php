@@ -25,7 +25,11 @@ class User extends Authenticatable
         'location',
         'phone',
         'about',
-        'password_confirmation'
+        'password_confirmation',
+        'school',
+        'dept',
+        'institute',
+        'areaOfExpertise'
     ];
 
     /**
@@ -50,6 +54,16 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function reviews()
+    {
+        return $this->belongsToMany(Review::class);
+    }
+
+    public function papers()
+    {
+        return $this->hasMany(Document::class);
     }
 
 }
