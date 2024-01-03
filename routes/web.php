@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -42,9 +43,7 @@ Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')-
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
 	// Route for all Papers
-	Route::get('my-papers', function () {
-		return view('pages.papers');
-	})->name('my-papers');
+	Route::get('my-papers', [PaperController::class, 'viewPaper'])->name('my-papers');
 	Route::get('new-paper', function () {
 		return view('pages.new-paper');
 	})->name('new-paper');
