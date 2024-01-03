@@ -63,7 +63,7 @@ class User extends Authenticatable
 
     public function papers()
     {
-        return $this->hasMany(Document::class);
+        return $this->hasMany(Document::class, 'author_id');
     }
 
 }

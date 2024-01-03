@@ -39,6 +39,11 @@ class Document extends Model
         return $this->hasMany(PaperVersion::class);
     }
 
+    public  function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function currentVersion() {
         return $this->hasOne(PaperVersion::class)->join('current_versions', 'current_versions.paper_version_id', '=', 'paper_versions.id')->where('document_id', $this->id);
     }
