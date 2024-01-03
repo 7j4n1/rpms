@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Document;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PaperController extends Controller
 {
+
+    public function viewPaper(){
+        $papers = Auth::user()->papers; 
+
+        return view('pages.papers', ['papers' => $papers]);
+    }
+
     public function storePaper(Request $request){
         $attributes = Validator::make($request->all(), [
             'title' => 'required|string',
@@ -21,14 +29,15 @@ class PaperController extends Controller
         if ($attributes->fails()) {
             return redirect()->back()->withErrors($attributes)->withInput();
         }
+        $currentUser = Auth::user(); 
 
         $storePath = "";
 
         if ($request->has('file')){
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $storePath = 'research_papers/'.$fileName;
-            $file->storeAs('research_papers', $fileName, 'public');
+            $storePath = 'research_papers/'. $currentUser->name. '/' .$fileName;
+            $file->storeAs('research_papers'. $currentUser->name, $fileName, 'public');
         }
             
 
@@ -50,7 +59,10 @@ class PaperController extends Controller
         $result = $paper->saveOrFail();
 
         if(!$result)
-        return redirect()->back()->withErrors("Error occur while saving paper")->withInput();
+            return redirect()->back()->withErrors(['error' => "Error occur while saving paper"])->withInput();
+
+        
+        return view('pages.papers');
 
 
     }
