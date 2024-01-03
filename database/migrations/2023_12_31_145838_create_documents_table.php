@@ -26,9 +26,10 @@ return new class extends Migration
             $table->tinyInteger('isApproved')->default(0);
             $table->unsignedBigInteger('reviewer_id')->nullable();
             $table->unsignedTinyInteger('isfullyUploaded')->default(0);
+            $table->longText('file_path')->nullable();
             // $table->unsignedBigInteger('current_version_id')->nullable();
             $table->timestamps();
-
+            
             // $table->foreign('current_version_id')->references('id')->on('paper_versions')->nullOnDelete();
             $table->foreign('author_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('reviewer_id')->references('id')->on('reviewers')->nullOnDelete();
