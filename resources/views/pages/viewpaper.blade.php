@@ -18,7 +18,7 @@
                     <p style="color: black">DOI: <a href="dx.doi.org/{{$paper->doi}}">{{$paper->doi}}</a></p>
                 </div>
                 <div class="col-md-6 mt-4">
-                    <h4 class="" style="color: black">{{ $paper->co_authors }}</h4>
+                    <h4 class="" style="color: black; font-size:medium; font-weight:500;">{{ $paper->co_authors }}</h4>
                 </div>
                 <hr />
             </div>
