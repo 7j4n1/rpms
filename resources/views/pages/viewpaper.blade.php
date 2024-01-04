@@ -46,7 +46,7 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0 px-3">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <hr class="mb-0"></hr>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             <div class="row">
                                 
                                 <div class="mb-3 col-md-6">
-                                   
+                                    <a href="{{url('/public/').$paper->file_path}}" class="btn bg-gradient-dark">Download Full-Text</button>
                                 </div>
                             </div>
                         </div>
