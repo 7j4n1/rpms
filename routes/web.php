@@ -38,15 +38,20 @@ Route::get('/reset-password/{token}', function ($token) {
 	return view('sessions.password.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 
+Route::get('publication/{document_id}', [PaperController::class, 'showPaper'])->name('viewpaper');
+
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
 	// Route for all Papers
-	Route::get('my-papers', [PaperController::class, 'viewPaper'])->name('my-papers');
+	Route::get('my-papers', [PaperController::class, 'viewPapers'])->name('my-papers');
 	Route::get('new-paper', function () {
-		return view('pages.new-paper');
+		return view('pages.upload');
 	})->name('new-paper');
+	Route::post('new-paper', [PaperController::class, 'storePaper'])->name('new-paper');
+
+
 	Route::get('billing', function () {
 		return view('pages.billing');
 	})->name('billing');

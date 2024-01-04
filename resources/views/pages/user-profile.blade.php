@@ -14,7 +14,9 @@
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
+                            <!-- <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
+                                class="w-100 border-radius-lg shadow-sm"> -->
+                                <img src="" alt="profile_image"
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
@@ -24,7 +26,7 @@
                                 {{ auth()->user()->name }}
                             </h5>
                             <p class="mb-0 font-weight-normal text-sm">
-                                CEO / Co-Founder
+                                
                             </p>
                         </div>
                     </div>
@@ -87,7 +89,7 @@
                                     </div>
                                 </div>
                         @endif
-                        <form method='POST' action='{{ route('user-profile') }}'>
+                        <form method='POST' action="{{ route('user-profile') }}">
                             @csrf
                             <div class="row">
                                 

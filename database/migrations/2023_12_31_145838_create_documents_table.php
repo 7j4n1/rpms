@@ -25,6 +25,10 @@ return new class extends Migration
             $table->string('availability')->default('private');
             $table->tinyInteger('isApproved')->default(0);
             $table->unsignedBigInteger('reviewer_id')->nullable();
+            $table->string('doi')->nullable();
+            $table->string('url')->nullable();
+            $table->string('month')->nullable();
+            $table->text('citation_key')->nullable();
             $table->unsignedTinyInteger('isfullyUploaded')->default(0);
             $table->longText('file_path')->nullable();
             // $table->unsignedBigInteger('current_version_id')->nullable();

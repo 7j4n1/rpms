@@ -18,8 +18,8 @@
                             <div class="card-body px-0 pb-2">
                                 <div class="table-responsive p-0">
                                     <table class="table align-items-center mb-0">
+                                        <!-- {{-- dd($papers) --}} -->
                                         
-                                        @if (count($papers) > 0)
                                         <thead>
                                             <tr>
                                                 <th
@@ -27,10 +27,10 @@
                                                     Title</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Author</th>
+                                                    Author(s)</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    Keywords</th>
+                                                    Type</th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                     Status</th>
@@ -41,59 +41,48 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            @foreach ($papers as $paper)
-
+                                            @if (count($mypapers) > 0)
+                                                @foreach($mypapers as $mpaper)
                                                 <tr>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0"><h6>{{$paper->paper_title}}</h6></p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div>
-                                                                <img src="{{ asset('assets') }}/img/team-2.jpg"
-                                                                    class="avatar avatar-sm me-3 border-radius-lg"
-                                                                    alt="user1">
+                                                        <td>
+                                                            <a class="text-xs font-weight-bold mb-0" href="{{ route('viewpaper', $mpaper->document_id) }}">{{$mpaper->paper_title}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    <h6 class="mb-0 text-sm">{{$mpaper->co_authors}}</h6>
+                                                                    <p class="text-xs text-secondary mb-0">
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm">{{$paper->co_authors}}</h6>
-                                                                <p class="text-xs text-secondary mb-0">
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <!-- <p class="text-xs font-weight-bold mb-0">Manager</p> -->
-                                                        <p class="text-xs text-secondary mb-0">{{$paper->keywords}}</p>
-                                                    </td>
-                                                    <td class="align-middle text-center text-sm">
-                                                        @if ($paper->availability == 'public')
-                                                            <span class="badge badge-sm bg-gradient-success">{{ $paper->availability}}</span>
-                                                        @else
-                                                            <span class="badge badge-sm bg-gradient-secondary">{{ $paper->availability}}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold">{{$paper->created_at}}</span>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <a href="javascript:;"
-                                                            class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Edit
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                        <tr>
-                                            <h3 class="text-xs text-center align-middle">No Papers Uploaded yet</h3>
-                                        </tr>
-                                        
-                                        @endif
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">{{$mpaper->paper_type}}</p>
+                                                        </td>
+                                                        <td class="align-middle text-center text-sm">
+                                                            @if ($mpaper->availability == 'public')
+                                                                <span class="badge badge-sm bg-gradient-success">{{ $mpaper->availability}}</span>
+                                                            @else
+                                                                <span class="badge badge-sm bg-gradient-secondary">{{ $mpaper->availability}}</span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <span
+                                                                class="text-secondary text-xs font-weight-bold">{{$mpaper->created_at}}</span>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <a href="javascript:;"
+                                                                class="text-secondary font-weight-bold text-xs"
+                                                                data-toggle="tooltip" data-original-title="Edit user">
+                                                                Edit
+                                                            </a>
+                                                        </td>
+                                                    </tr> 
                                             
-                                            
+                                                @endforeach
+                                            @else
+                                                <h3 class="text-center align-middle">No papers uploaded yet</h3>
+                                            @endif
                                            
                                             
                                         </tbody>

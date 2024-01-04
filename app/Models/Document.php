@@ -27,7 +27,11 @@ class Document extends Model
         'isapproved',
         'reviewer_id',
         'isfullyUploaded',
-        'current_version_id'
+        'current_version_id',
+        'month',
+        'doi',
+        'citation_key',
+        'url'
     ];
 
     public function reviews()
